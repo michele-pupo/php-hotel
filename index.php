@@ -58,6 +58,16 @@ $hotels = [
 <body>
     <div class="container">
         <h1 class="display-1 fw-bold d-flex justify-content-center py-4">Hotels</h1>
+
+        <!-- form per filtrare gli hotel in base al parcheggio -->
+        <form action="" method="GET">
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="parkingFilter" name="parkingFilter" value="si">
+                <label class="form-check-label" for="parkingFilter">Hotel con parcheggio</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Cerca</button>
+        </form>
+        <!-- fine form per filtrare gli hotel in base al parcheggio -->
     
         <!-- stampa dati hotel in tabella -->
         <table class="table text-center">
