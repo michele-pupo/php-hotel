@@ -56,8 +56,37 @@ $hotels = [
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-
-
+    <div class="container">
+        <h1 class="display-1 fw-bold d-flex justify-content-center py-4">Hotels</h1>
+    
+        <!-- stampa dati hotel in tabella -->
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Desscrizione</th>
+                    <th>Parcheggio</th>
+                    <th>Voto</th>
+                    <th>Distanza dal centro</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!-- ciclo foreach per ciclare sugli hotel presenti -->
+            <?php foreach ($hotels as $hotel) :?>
+                <tr>
+                    <td><?php echo $hotel['name']; ?></th>
+                    <td><?php echo $hotel['description']; ?></td>
+                    <!-- trasformiamo il "tru o false" del parcheggio in "si o no" -->
+                    <td><?php echo $hotel['parking'] ? 'Si' : 'No'; ?></td>
+                    <td><?php echo $hotel['vote']; ?></td>
+                    <td><?php echo $hotel ['distance_to_center']; ?> km</td>
+                </tr>
+            <!-- fine del ciclo foreach per ciclare sugli hotel presenti -->
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <!-- fine stampa dati hotel in tabella -->
+    </div>
 
 <!-- script bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
