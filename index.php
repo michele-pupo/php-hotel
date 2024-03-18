@@ -55,6 +55,19 @@
         $filters_hotel = $temp_hotels;
     }
 
+    //filter con voto
+    if(!empty($_GET['vote'])){
+        $vote = $_GET['vote'] ? intval($_GET['vote']) : false;
+   
+        $temp_hotels = [];
+        foreach($filters_hotel as $hotel) {
+            if($hotel['vote'] >= $vote) {
+                $temp_hotels[] = $hotel;
+            }
+        }
+        $filters_hotel = $temp_hotels;
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -74,31 +87,6 @@
     <div class="container">
         <h1 class="display-1 fw-bold d-flex justify-content-center py-4">Hotels</h1>
 
-        <!-- form per filtrare gli hotel in base al parcheggio -->
-        <form action="index.php" method="GET">
-            <div class="row g-3 pb-3 align-items-center d-flex justify-content-center">
-                <!-- checkbox per selezionare "con parcheggio" -->
-                <div class="col-auto">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="parking" id="parkingYes" value="yes" <?php if (!empty($_GET['parking']) && $_GET['parking'] === 'yes') echo 'checked'; ?>>
-                        <label class="form-check-label" for="parkingYes">Con parcheggio</label>
-                    </div>
-                </div>
-                <!-- checkbox per selezionare "senza parcheggio" -->
-                <div class="col-auto">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="parking" id="parkingNo" value="no" <?php if (!empty($_GET['parking']) && $_GET['parking'] === 'no') echo 'checked'; ?>>
-                        <label class="form-check-label" for="parkingNo">Senza parcheggio</label>
-                    </div>
-                </div>
-                <!-- bottone di submit -->
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">Cerca</button>
-                </div>
-            </div>
-        </form>
-        <!-- fine form per filtrare gli hotel in base al parcheggio -->
-    
         <!-- stampa dati di tutti gli hotel in tabella -->
         <table class="table text-center">
             <thead>
@@ -126,18 +114,64 @@
             </tbody>
         </table>
         <!-- fine stampa dati di tutti gli hotel in tabella -->
-        
+    </div>    
+
+    <div class="container">
         <h2 class="display-1 fw-bold d-flex justify-content-center py-4">Hotels filtrati</h2>
+        
+        <div>
+            <!-- form per filtrare gli hotel in base al parcheggio -->
+            <form class="d-flex gap-5 justify-content-around " action="index.php" method="GET">
+                <div class="d-flex flex-column row g-3 pb-3 align-items-center">
+                    <!-- checkbox per selezionare "con parcheggio" -->
+                    <h3>Filtra per parcheggio</h3>
+                    <div class="col-auto">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="parking" id="parkingYes" value="yes" <?php if (!empty($_GET['parking']) && $_GET['parking'] === 'yes') echo 'checked'; ?>>
+                            <label class="form-check-label" for="parkingYes">Con parcheggio</label>
+                        </div>
+                    </div>
+                    <!-- checkbox per selezionare "senza parcheggio" -->
+                    <div class="col-auto">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="parking" id="parkingNo" value="no" <?php if (!empty($_GET['parking']) && $_GET['parking'] === 'no') echo 'checked'; ?>>
+                            <label class="form-check-label" for="parkingNo">Senza parcheggio</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- select per filtrare sul voto -->
+                    <div class="col-auto d-flex flex-column align-items-center">
+                    <h3>Filtra per voto</h3>
+                        <label class="visually-hidden" for="voto">Voto</label>
+                        <div class="form-check">
+                            <?php for ($i = 1; $i <= 5; $i++): ?>
+                                <input class="form-check-input" type="radio" name="vote" id="voto<?php echo $i; ?>" value="<?php echo $i; ?>" <?php if ($vote === $i) echo 'checked'; ?>>
+                                <label class="form-check-label" for="voto<?php echo $i; ?>"><?php echo $i; ?></label>
+                                <br>
+                            <?php endfor; ?>
+                        </div>
+                    </div>
+                    <!-- fine select per filtrare sul voto -->
+                </div>
+            </form>
+            <!-- bottone di submit -->
+            <div class="col-auto d-flex justify-content-center py-4">
+                <button type="submit" class="btn btn-primary">Cerca</button>
+            </div>
+            <!-- fine form per filtrare gli hotel in base al parcheggio -->
+        </div>
 
         <!--stampa dati degli hotel filtrati in tabella-->
         <table class="table text-center">
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Parking</th>
-                    <th scope="col">Vote</th>
-                    <th scope="col">Distance_to_center</th>
+                    <th>Nome</th>
+                    <th>Desscrizione</th>
+                    <th>Parcheggio</th>
+                    <th>Voto</th>
+                    <th>Distanza dal centro</th>
                 </tr>
             </thead>
             <tbody>
@@ -149,7 +183,7 @@
                     <!-- trasformiamo il "tru o false" del parcheggio in "si o no" -->
                     <td><?php echo $hotel['parking'] ? 'Si' : 'No'; ?></td>
                     <td><?php echo $hotel['vote']; ?></td>
-                    <td><?php echo $hotel ['distance_to_center']; ?>km</td>
+                    <td><?php echo $hotel ['distance_to_center']; ?> km</td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
