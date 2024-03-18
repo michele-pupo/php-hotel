@@ -88,7 +88,7 @@
         <h1 class="display-1 fw-bold d-flex justify-content-center py-4">Hotels</h1>
 
         <!-- stampa dati di tutti gli hotel in tabella -->
-        <table class="table text-center">
+        <table class="table text-center border border-3">
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -114,17 +114,15 @@
             </tbody>
         </table>
         <!-- fine stampa dati di tutti gli hotel in tabella -->
-    </div>    
-
-    <div class="container">
+        
         <h2 class="display-1 fw-bold d-flex justify-content-center py-4">Hotels filtrati</h2>
         
-        <div>
+        <div class="d-flex">
             <!-- form per filtrare gli hotel in base al parcheggio -->
-            <form class="d-flex gap-5 justify-content-around " action="index.php" method="GET">
-                <div class="d-flex flex-column row g-3 pb-3 align-items-center">
+            <form action="index.php" method="GET">
+            <h3>Filtra per parcheggio</h3>
+                <div class="row g-3 pb-3">
                     <!-- checkbox per selezionare "con parcheggio" -->
-                    <h3>Filtra per parcheggio</h3>
                     <div class="col-auto">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="parking" id="parkingYes" value="yes" <?php if (!empty($_GET['parking']) && $_GET['parking'] === 'yes') echo 'checked'; ?>>
@@ -138,12 +136,10 @@
                             <label class="form-check-label" for="parkingNo">Senza parcheggio</label>
                         </div>
                     </div>
-                </div>
 
-                <div>
                     <!-- select per filtrare sul voto -->
-                    <div class="col-auto d-flex flex-column align-items-center">
-                    <h3>Filtra per voto</h3>
+                    <div class="col-auto">
+                        <h3>Filtra per voto</h3>
                         <label class="visually-hidden" for="voto">Voto</label>
                         <div class="form-check">
                             <?php for ($i = 1; $i <= 5; $i++): ?>
@@ -154,17 +150,18 @@
                         </div>
                     </div>
                     <!-- fine select per filtrare sul voto -->
+
+                    <!-- bottone di submit -->
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Cerca</button>
+                    </div>
                 </div>
             </form>
-            <!-- bottone di submit -->
-            <div class="col-auto d-flex justify-content-center py-4">
-                <button type="submit" class="btn btn-primary">Cerca</button>
-            </div>
             <!-- fine form per filtrare gli hotel in base al parcheggio -->
         </div>
 
         <!--stampa dati degli hotel filtrati in tabella-->
-        <table class="table text-center">
+        <table class="table text-center border border-3">
             <thead>
                 <tr>
                     <th>Nome</th>
