@@ -117,29 +117,31 @@
         
         <h2 class="display-1 fw-bold d-flex justify-content-center py-4">Hotels filtrati</h2>
         
-        <div class="d-flex">
+        <div>
             <!-- form per filtrare gli hotel in base al parcheggio -->
             <form action="index.php" method="GET">
-            <h3>Filtra per parcheggio</h3>
-                <div class="row g-3 pb-3">
-                    <!-- checkbox per selezionare "con parcheggio" -->
-                    <div class="col-auto">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="parking" id="parkingYes" value="yes" <?php if (!empty($_GET['parking']) && $_GET['parking'] === 'yes') echo 'checked'; ?>>
-                            <label class="form-check-label" for="parkingYes">Con parcheggio</label>
+                <div class="pb-3 d-flex gap-5">
+                    <div class="d-flex flex-column">
+                        <h3 class="fw-bold">Filtra per parcheggio</h3>
+                        <!-- checkbox per selezionare "con parcheggio" -->
+                        <div class="col-auto">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="parking" id="parkingYes" value="yes" <?php if (!empty($_GET['parking']) && $_GET['parking'] === 'yes') echo 'checked'; ?>>
+                                <label class="form-check-label" for="parkingYes">Con parcheggio</label>
+                            </div>
                         </div>
-                    </div>
-                    <!-- checkbox per selezionare "senza parcheggio" -->
-                    <div class="col-auto">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="parking" id="parkingNo" value="no" <?php if (!empty($_GET['parking']) && $_GET['parking'] === 'no') echo 'checked'; ?>>
-                            <label class="form-check-label" for="parkingNo">Senza parcheggio</label>
+                        <!-- checkbox per selezionare "senza parcheggio" -->
+                        <div class="col-auto">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="parking" id="parkingNo" value="no" <?php if (!empty($_GET['parking']) && $_GET['parking'] === 'no') echo 'checked'; ?>>
+                                <label class="form-check-label" for="parkingNo">Senza parcheggio</label>
+                            </div>
                         </div>
                     </div>
 
                     <!-- select per filtrare sul voto -->
                     <div class="col-auto">
-                        <h3>Filtra per voto</h3>
+                        <h3 class="fw-bold">Filtra per voto</h3>
                         <label class="visually-hidden" for="voto">Voto</label>
                         <div class="form-check">
                             <?php for ($i = 1; $i <= 5; $i++): ?>
@@ -152,7 +154,7 @@
                     <!-- fine select per filtrare sul voto -->
 
                     <!-- bottone di submit -->
-                    <div class="col-auto">
+                    <div class="col-auto pt-5">
                         <button type="submit" class="btn btn-primary">Cerca</button>
                     </div>
                 </div>
